@@ -4,6 +4,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import '../widget/deshboard.dart';
 import '../widget/gap_height.dart';
+import 'auth/login_screen.dart';
 import 'data_list_screen.dart';
 import 'data_entry_screen.dart';
 
@@ -41,7 +42,12 @@ class _DeshBoardScreenState extends State<DeshBoardScreen> {
                     child: const Text("No"),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => LogInPage(),
+                      ),
+                    ),
                     style: ElevatedButton.styleFrom(
                       shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),

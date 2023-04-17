@@ -17,6 +17,7 @@ Position? _currentPosition;
 class _LogInPageState extends State<LogInPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  // login method
   Future<void> fetchlogin() async {
     String link = "http://apps.bigerp24.com/api/login";
     try {
@@ -40,6 +41,9 @@ class _LogInPageState extends State<LogInPage> {
     }
   }
 
+  
+
+  //
   final box = GetStorage();
   getCurrentLocation() async {
     LocationPermission permission;
