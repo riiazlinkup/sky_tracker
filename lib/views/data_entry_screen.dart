@@ -7,8 +7,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:sky_tracker/Api_integration/api_get_area.dart';
 import 'package:sky_tracker/otp_screen.dart';
-import 'package:sky_tracker/providers/counter_probider.dart';
+import 'package:sky_tracker/providers/area_provider.dart';
 import 'package:sky_tracker/widget/button.dart';
+import '../const/app_colors.dart';
 import '../widget/gap_height.dart';
 
 class DataEntryScreen extends StatefulWidget {
@@ -46,8 +47,6 @@ String? fourthQuestionAns;
 String? sixthQuestionAns;
 
 class _DataEntryScreenState extends State<DataEntryScreen> {
-  ApiAllGetArea? apiAllGetArea;
-
   String? currentAddress;
 
   Future<void> _getCurrentAddress() async {
@@ -60,6 +59,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
     });
   }
 
+  ApiAllGetArea? apiAllGetArea;
   @override
   void initState() {
     _getCurrentAddress();
@@ -82,6 +82,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
         appBar: AppBar(
           title: const Text("Data Entry"),
           centerTitle: true,
+          backgroundColor: AppColors.kPrimaryColor,
           // automaticallyImplyLeading: false,
         ),
         body: Padding(
@@ -158,7 +159,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                           Radio(
                             value: "yes",
                             groupValue: _newSim,
-                            activeColor: Colors.teal,
+                            activeColor: AppColors.kPrimaryColor,
                             onChanged: (value) {
                               setState(() {
                                 _newSim = value!;
@@ -177,7 +178,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                           Radio(
                             value: "no",
                             groupValue: _newSim,
-                            activeColor: Colors.teal,
+                            activeColor: AppColors.kPrimaryColor,
                             onChanged: (value) {
                               setState(() {
                                 _newSim = value!;
@@ -206,7 +207,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                           Radio(
                             value: "yes",
                             groupValue: _bLApp,
-                            activeColor: Colors.teal,
+                            activeColor: AppColors.kPrimaryColor,
                             onChanged: (value) {
                               setState(() {
                                 _bLApp = value;
@@ -225,7 +226,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                           Radio(
                             value: "no",
                             groupValue: _bLApp,
-                            activeColor: Colors.teal,
+                            activeColor: AppColors.kPrimaryColor,
                             onChanged: (value) {
                               setState(() {
                                 _bLApp = value;
@@ -254,7 +255,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                           Radio(
                             value: "yes",
                             groupValue: _toffeeApp,
-                            activeColor: Colors.teal,
+                            activeColor: AppColors.kPrimaryColor,
                             onChanged: (value) {
                               setState(() {
                                 _toffeeApp = value;
@@ -273,7 +274,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                           Radio(
                             value: "no",
                             groupValue: _toffeeApp,
-                            activeColor: Colors.teal,
+                            activeColor: AppColors.kPrimaryColor,
                             onChanged: (value) {
                               setState(() {
                                 _toffeeApp = value;
@@ -303,7 +304,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                           Radio(
                               value: "yes",
                               groupValue: _dataCell,
-                              activeColor: Colors.teal,
+                              activeColor: AppColors.kPrimaryColor,
                               onChanged: (value) {
                                 setState(() {
                                   _dataCell = value;
@@ -322,7 +323,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                           Radio(
                               value: "no",
                               groupValue: _dataCell,
-                              activeColor: Colors.teal,
+                              activeColor: AppColors.kPrimaryColor,
                               onChanged: (value) {
                                 setState(() {
                                   _dataCell = value;
@@ -377,7 +378,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                           Radio(
                               value: "yes",
                               groupValue: _recharge,
-                              activeColor: Colors.teal,
+                              activeColor: AppColors.kPrimaryColor,
                               onChanged: (value) {
                                 setState(() {
                                   _recharge = value;
@@ -396,7 +397,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                           Radio(
                             value: "no",
                             groupValue: _recharge,
-                            activeColor: Colors.teal,
+                            activeColor: AppColors.kPrimaryColor,
                             onChanged: (value) {
                               setState(() {
                                 _recharge = value;
@@ -452,7 +453,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                           Radio(
                             value: "yes",
                             groupValue: _gift,
-                            activeColor: Colors.teal,
+                            activeColor: AppColors.kPrimaryColor,
                             onChanged: (value) {
                               setState(() {
                                 _gift = value;
@@ -472,7 +473,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                           Radio(
                             value: "no",
                             groupValue: _gift,
-                            activeColor: Colors.teal,
+                            activeColor: AppColors.kPrimaryColor,
                             onChanged: (value) {
                               setState(() {
                                 _gift = value;
@@ -576,20 +577,6 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                     Expanded(
                       flex: 7,
                       child: Text(currentAddress == null ? "Loading..." : currentAddress.toString()),
-
-                      // child: SizedBox(
-                      //   height: MediaQuery.of(context).size.height / 20,
-                      //   child:
-                      //   const TextField(
-                      //     //controller: _phoneController,
-                      //     // keyboardType: TextInputType.phone,
-                      //     decoration: InputDecoration(
-                      //       hintText: "Sadman",
-                      //       hintStyle: TextStyle(color: Colors.black26),
-                      //       contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                      //       border: OutlineInputBorder(),
-                      //     ),
-                      //   ),
                     ),
                   ],
                 ),
@@ -1165,7 +1152,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                                 fit: BoxFit.cover,
                               )
                             : Image.file(
-                                File(images!),
+                                File(images!.path),
                                 height: 200,
                                 width: 200,
                                 fit: BoxFit.cover,
@@ -1174,13 +1161,18 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
                       height: 15,
                     ),
                     ElevatedButton(
+                        style: ElevatedButton.styleFrom(backgroundColor: AppColors.kPrimaryColor),
                         onPressed: () {
                           _imageSource = ImageSource.camera;
                           _getImage();
                         },
                         child: const Text(
                           "Select camera",
-                          style: TextStyle(color: Color.fromARGB(255, 249, 254, 255), fontWeight: FontWeight.w600, fontSize: 20),
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 249, 254, 255),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 20,
+                          ),
                         )),
                   ],
                 ),
@@ -1200,6 +1192,30 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
     );
   }
 
+  emtyMethod() {
+    setState(() {
+      _nameController.text = "";
+      _phoneController.text = "";
+      _newSim = "";
+      _bLApp = "";
+      _toffeeApp = "";
+      _dataCell = "";
+      _DataSellController.text = "";
+      _recharge = "";
+      _rechargeController.text = "";
+      _gift = "";
+      _GiftController.text = "";
+      _selectedArea != "";
+      firstQuestionAns = "";
+      SecondQuestionAns = "";
+      thirdQuestionAns = "";
+      fourthQuestionAns = "";
+      _fiveQuestionController.text = "";
+      sixthQuestionAns = "";
+      _seventhQuestionController.text = "";
+    });
+  }
+
   fetchOtpGet() async {
     String link = "http://apps.bigerp24.com/api/save_data";
     var formData = FormData.fromMap({
@@ -1215,7 +1231,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
       "gift": "$_gift",
       "gift_name": "${_GiftController.text}",
       "area_id": "$_selectedArea",
-      "location": "dhaka",
+      "location": "$currentAddress",
       "program": "$firstQuestionAns",
       "experience": "$SecondQuestionAns",
       "app_experience": "$thirdQuestionAns",
@@ -1223,7 +1239,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
       "event": "${_fiveQuestionController.text}",
       "service": "$sixthQuestionAns",
       "future": "${_seventhQuestionController.text}",
-      "image": "$images",
+      "image": await MultipartFile.fromFile(images!.path, filename: "fileName"),
     });
     try {
       Response response = await Dio().post(link, data: formData);
@@ -1232,6 +1248,7 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
       print("message============> ${response.data["message"]}");
       print(" mobile =================> ${response.data["mobile"]}");
       print("otpCode================>  ${response.data["otpCode"]}");
+      emtyMethod();
       getmessage = "${response.data["message"]}";
       getmobilenumber = "${response.data["mobile"]}";
       getotp = "${response.data["otpCode"]}";
@@ -1256,15 +1273,12 @@ class _DataEntryScreenState extends State<DataEntryScreen> {
   String? getmessage;
   String? getmobilenumber;
   String? getotp;
-  String? images;
+  XFile? images;
   ImageSource _imageSource = ImageSource.camera;
 
   void _getImage() async {
-    final selectedImage = await ImagePicker().pickImage(source: _imageSource);
-    if (selectedImage != null) {
-      setState(() {
-        images = selectedImage.path;
-      });
-    }
+    ImagePicker _picker = ImagePicker();
+    images = await _picker.pickImage(source: ImageSource.camera);
+    setState(() {});
   }
 }

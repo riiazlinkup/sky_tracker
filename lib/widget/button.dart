@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../const/app_colors.dart';
+
 class PurpleButton extends StatelessWidget {
   String? buttonName;
   Function()? onPressed;
@@ -13,7 +15,7 @@ class PurpleButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.teal,
+           backgroundColor: AppColors.kPrimaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(11),
           ),

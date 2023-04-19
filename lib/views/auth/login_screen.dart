@@ -1,10 +1,10 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:sky_tracker/views/deshboard_screen.dart';
+import 'package:sky_tracker/Api_integration/api_client.dart';
+import 'package:sky_tracker/const/app_colors.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
@@ -18,30 +18,28 @@ class _LogInPageState extends State<LogInPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   // login method
-  Future<void> fetchlogin() async {
-    String link = "http://apps.bigerp24.com/api/login";
-    try {
-      final formData = FormData.fromMap(
-        {"username": "${_usernameController.text}", "password": "${_passwordController.text}"},
-      );
-      final response = await Dio().post(link, data: formData);
-      print("All api dataaaaaaaa=====>>>$response");
+  // Future<void> fetchlogin() async {
+  //   String link = "http://apps.bigerp24.com/api/login";
+  //   try {
+  //     final formData = FormData.fromMap(
+  //       {"username": "${_usernameController.text}", "password": "${_passwordController.text}"},
+  //     );
+  //     final response = await Dio().post(link, data: formData);
+  //     print("All api dataaaaaaaa=====>>>$response");
 
-      if (response.statusCode == 200) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DeshBoardScreen(currentPosition: _currentPosition!),
-          ),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(duration: Duration(seconds: 1), content: Text("Login successfull")));
-      }
-    } catch (e) {
-      print("Something is wrong>>>>>>${e}");
-    }
-  }
-
-  
+  //     if (response.statusCode == 200) {
+  //       Navigator.pushReplacement(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: (context) => DeshBoardScreen(currentPosition: _currentPosition!),
+  //         ),
+  //       );
+  //       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(duration: Duration(seconds: 1), content: Text("Login successfull")));
+  //     }
+  //   } catch (e) {
+  //     print("Something is wrong>>>>>>${e}");
+  //   }
+  // }
 
   //
   final box = GetStorage();
@@ -105,7 +103,7 @@ class _LogInPageState extends State<LogInPage> {
             FocusManager.instance.primaryFocus?.unfocus();
           },
           child: Container(
-            color: const Color.fromARGB(255, 2, 135, 145),
+            color: AppColors.kPrimaryColor,
             height: double.infinity,
             width: double.infinity,
             child: SingleChildScrollView(
@@ -141,7 +139,7 @@ class _LogInPageState extends State<LogInPage> {
                         width: MediaQuery.of(context).size.width,
                         padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 45.0),
                         decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 191, 212, 214),
+                            color: Color.fromARGB(255, 255, 255, 255),
                             borderRadius: BorderRadius.circular(15.0),
                             border: Border.all(color: const Color.fromARGB(255, 11, 7, 248), width: 3.2)),
                         child: Column(
@@ -187,16 +185,20 @@ class _LogInPageState extends State<LogInPage> {
                               onTap: () async {
                                 await getCurrentLocation();
                                 if (_currentPosition != null) {
-                                  Fluttertoast.showToast(
-                                    msg: 'Please get current location first',
-                                    toastLength: Toast.LENGTH_SHORT,
-                                    gravity: ToastGravity.BOTTOM,
-                                    backgroundColor: Colors.grey[600],
-                                    textColor: Colors.white,
-                                  );
+                                  // Fluttertoast.showToast(
+                                  //   msg: 'Please get current location first',
+                                  //   toastLength: Toast.LENGTH_SHORT,
+                                  //   gravity: ToastGravity.BOTTOM,
+                                  //   backgroundColor: Colors.grey[600],
+                                  //   textColor: Colors.white,
+                                  // );
                                 }
                                 if (_formkey.currentState!.validate()) {
-                                  fetchlogin();
+                                  ApiClient.login(
+                                      username: "${_usernameController.text}",
+                                      password: "${_passwordController.text}",
+                                      currentPosition: _currentPosition!,
+                                      context: context);
                                   _usernameController.text = "";
                                   _passwordController.text = "";
                                 } else {

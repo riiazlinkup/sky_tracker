@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:sky_tracker/const/app_colors.dart';
 import '../widget/deshboard.dart';
-import '../widget/gap_height.dart';
 import 'auth/login_screen.dart';
 import 'data_list_screen.dart';
 import 'data_entry_screen.dart';
@@ -37,7 +36,8 @@ class _DeshBoardScreenState extends State<DeshBoardScreen> {
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      backgroundColor: AppColors.kPrimaryColor,
+                      //shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
                     child: const Text("No"),
                   ),
@@ -45,11 +45,12 @@ class _DeshBoardScreenState extends State<DeshBoardScreen> {
                     onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => LogInPage(),
+                        builder: (_) => const LogInPage(),
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      backgroundColor: AppColors.kPrimaryColor,
+                      // shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
                     child: const Text("Yes"),
                   ),
@@ -82,38 +83,54 @@ class _DeshBoardScreenState extends State<DeshBoardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("DESHBOARD"),
+        title: const Text("SKY  TRACKER"),
         centerTitle: true,
+        backgroundColor: AppColors.kPrimaryColor,
       ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.teal,
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(30.0),
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?w=740&t=st=1681638562~exp=1681639162~hmac=72abcb9ab92b4a566bafa56afd3afe300e156bbef6641a4c0af910d9092eb0d6",
-                  ),
+            DrawerHeader(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("images/Banglalink-Logo.jpg"),
+                  fit: BoxFit.fill,
                 ),
+                // color: AppColors.kPrimaryColor,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU"),
+                    radius: 37,
+                  ),
+                  Text(
+                    "Admin",
+                    style: TextStyle(color: Colors.white, fontSize: 20.0),
+                  ),
+                  Icon(Icons.expand_circle_down, color: Colors.white),
+                ],
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.person_outline_rounded),
-              title: const Text('Profile'),
+              //leading: const Icon(Icons.person_outline_rounded),
+              title: const Text(
+                'Profile',
+                style: TextStyle(color: AppColors.kPrimaryColor),
+              ),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: const Icon(
-                Icons.logout,
+              // leading: const Icon(Icons.logout),
+              title: const Text(
+                'Sign out',
+                style: TextStyle(color: AppColors.kPrimaryColor),
               ),
-              title: const Text('Sign Out'),
               onTap: () {
                 _logOut(context);
               },
@@ -122,59 +139,88 @@ class _DeshBoardScreenState extends State<DeshBoardScreen> {
         ),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          Stack(
             children: [
-              DeshBoard(
-                title: "Data Entry",
-                icon: Icons.receipt_long_outlined,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    CupertinoPageRoute(
-                      builder: (_) => DataEntryScreen(
-                        currentPositionUser: widget.currentPosition,
+              Container(
+                width: double.infinity,
+                height: 70.0,
+                color: AppColors.kPrimaryColor,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //crossAxisAlignment: CrossAxisAlignment.baseline,
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.only(left: 68.0),
+                      child: Text(
+                        'Welcome, Admin',
+                        style: TextStyle(color: Colors.white, fontSize: 18.0),
                       ),
                     ),
-                  );
-                },
-              ),
-              const SizedBox(width: 10.0),
-              DeshBoard(
-                title: "Data List",
-                icon: Icons.list_alt_outlined,
-                onTap: () => Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (_) => DataListScreen(),
-                  ),
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfjno7hGrNNuPZwaFZ8U8Mhr_Yq39rzd_p0YN_HVYk6KFmMETjtgd9bwl0UhU6g4xDDGg&usqp=CAU"),
+                      radius: 25,
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-          gapHeight(height: 10.0),
-          //   Expanded(
-          //     child: SizedBox(
-          //       height: MediaQuery.of(context).size.height / 20,
-          //       child: Text(
-          //         _currentAddress == null ? "Loading..." : _currentAddress.toString(),
-          //       ),
-          //       // TextField(
-          //       //   controller: _phoneController,
-          //       //   // keyboardType: TextInputType.phone,
-          //       //   decoration: const InputDecoration(
-          //       //     // hintText: "Sadman",
-          //       //     hintStyle: TextStyle(color: Colors.black26),
-          //       //     contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-          //       //     border: OutlineInputBorder(),
-          //       //   ),
-          //       // ),
-          //     ),
-          //   ),
+          const SizedBox(height: 10.0),
+          const Padding(
+            padding: EdgeInsets.only(left: 8.0),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "DeshBoard :",
+                style: TextStyle(
+                  fontSize: 18.0,
+                  color: Color.fromARGB(134, 41, 41, 41),
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 10.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Positioned(
+                right: 200,
+                top: 130,
+                child: DeshBoard(
+                  title: "Data Entry",
+                  icon: Icons.receipt_long_outlined,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) {
+                        return DataEntryScreen(
+                          currentPositionUser: widget.currentPosition,
+                        );
+                      }),
+                    );
+                  },
+                ),
+              ),
+              Positioned(
+                right: 70,
+                top: 130,
+                child: DeshBoard(
+                  title: "Data List",
+                  icon: Icons.list_alt_outlined,
+                  onTap: () => Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (_) => DataListScreen(),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );

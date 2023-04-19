@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
-import 'package:sky_tracker/providers/counter_probider.dart';
+import 'package:sky_tracker/providers/area_provider.dart';
 import 'package:sky_tracker/views/auth/login_screen.dart';
 
 void main() async {
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.teal,
+          primarySwatch: Colors.blue,
         ),
         home: LogInPage(),
       ),

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import '../const/app_colors.dart';
 import 'gap_height.dart';
 
 class DeshBoard extends StatelessWidget {
   DeshBoard({
-    super.key,
     required this.title,
     required this.icon,
     required this.onTap,
+    super.key,
   });
 
   IconData icon;
@@ -15,12 +16,14 @@ class DeshBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return 
+    InkWell(
       onTap: onTap,
-      child: Card(
+      child: 
+      Card(
         elevation: 10.0,
         shape: RoundedRectangleBorder(
-          side: const BorderSide(color: Colors.teal),
+          side: const BorderSide(color: AppColors.kPrimaryColor),
           borderRadius: BorderRadius.circular(12.0),
         ),
         child: Container(
@@ -42,6 +45,8 @@ class DeshBoard extends StatelessWidget {
           ),
         ),
       ),
+   
     );
+  
   }
 }

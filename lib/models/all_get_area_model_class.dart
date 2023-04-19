@@ -80,3 +80,4 @@ class Areas {
     return data;
   }
 }
+
